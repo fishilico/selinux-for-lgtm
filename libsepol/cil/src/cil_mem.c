@@ -55,6 +55,7 @@ void *cil_malloc(size_t size)
 			return NULL;
 		}
 		(*cil_mem_error_handler)();
+		abort();
 	}
 
 	return mem;
@@ -65,6 +66,7 @@ void *cil_calloc(size_t num_elements, size_t element_size)
 	void *mem = calloc(num_elements, element_size);
 	if (mem == NULL){
 		(*cil_mem_error_handler)();
+		abort();
 	}
 
 	return mem;
@@ -78,6 +80,7 @@ void *cil_realloc(void *ptr, size_t size)
 			return NULL;
 		}
 		(*cil_mem_error_handler)();
+		abort();
 	}
 
 	return mem;
@@ -95,6 +98,7 @@ char *cil_strdup(const char *str)
 	mem = strdup(str);
 	if (mem == NULL) {
 		(*cil_mem_error_handler)();
+		abort();
 	}
 
 	return mem;
@@ -111,6 +115,7 @@ __attribute__ ((format (printf, 2, 3))) int cil_asprintf(char **strp, const char
 
 	if (rc == -1) {
 		(*cil_mem_error_handler)();
+		abort();
 	}
 
 	return rc;
